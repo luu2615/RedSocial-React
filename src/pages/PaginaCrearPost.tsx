@@ -15,6 +15,7 @@ export default function PaginaCrearPost() {
   const [selectedTagIds, setSelectedTagIds] = useState<number[]>([]);
   const [enviando, setEnviando] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [exito, setExito] = useState(false);
 
   useEffect(() => {
     getTags()
@@ -51,6 +52,7 @@ export default function PaginaCrearPost() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError(null);
+    setExito(false);
 
     if (!description.trim()) {
       setError("La descripción es obligatoria");
@@ -86,23 +88,31 @@ export default function PaginaCrearPost() {
         );
       }
 
-      navigate("/profile");
+      setExito(true);
+      setTimeout(() => {
+        navigate("/profile");
+      }, 1000);
     } catch {
       setError("Ocurrió un error al crear la publicación");
-    } finally {
       setEnviando(false);
     }
   };
 
   return (
-    <div className="container py-4">
+    <div className="container py-4 fade-in">
       <div className="row justify-content-center">
         <div className="col-lg-8">
-          <div className="card shadow-sm">
+          <div className="card shadow-sm card-hover">
             <div className="card-body p-4">
               <h2 className="card-title mb-4">Crear Nueva Publicación</h2>
 
-              {error && <div className="alert alert-danger">{error}</div>}
+              {exito && (
+                <div className="alert alert-success fade-in py-2">
+                  ✅ ¡Publicación creada con éxito!
+                </div>
+              )}
+
+              {error && <div className="alert alert-danger fade-in py-2">{error}</div>}
 
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
@@ -113,7 +123,7 @@ export default function PaginaCrearPost() {
                     id="description"
                     className="form-control"
                     rows={4}
-                    placeholder="¿Qué estás pensando?"
+                    placeholder="¿Qué estás pensando (o prefiriendo no decir)?"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     required
@@ -170,7 +180,7 @@ export default function PaginaCrearPost() {
                           <button
                             type="button"
                             key={tag.id}
-                            className={`btn btn-sm ${seleccionada
+                            className={`btn btn-sm tag-badge ${seleccionada
                                 ? "btn-primary"
                                 : "btn-outline-secondary"
                               }`}

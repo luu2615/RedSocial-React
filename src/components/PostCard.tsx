@@ -22,7 +22,7 @@ export default function PostCard({ post }: Props) {
   }, [post.id]);
 
   return (
-    <div className="card mb-4 shadow-sm">
+    <div className="card mb-4 shadow-sm card-hover">
       {imagenes.length > 0 && (
         <img
           src={imagenes[0].url}

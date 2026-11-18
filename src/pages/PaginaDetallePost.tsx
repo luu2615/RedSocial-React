@@ -22,6 +22,7 @@ export default function PaginaDetallePost() {
   const [nuevoComentario, setNuevoComentario] = useState("");
   const [enviando, setEnviando] = useState(false);
   const [errorComentario, setErrorComentario] = useState<string | null>(null);
+  const [exitoComentario, setExitoComentario] = useState(false);
 
   const postId = Number(id);
 
@@ -49,6 +50,7 @@ export default function PaginaDetallePost() {
   const handleSubmitComentario = async (e: FormEvent) => {
     e.preventDefault();
     setErrorComentario(null);
+    setExitoComentario(false);
 
     const textoLimpio = nuevoComentario.trim();
     if (!textoLimpio) return;
@@ -69,6 +71,8 @@ export default function PaginaDetallePost() {
 
       setComentarios((prev) => [...prev, comentarioCompleto]);
       setNuevoComentario("");
+      setExitoComentario(true);
+      setTimeout(() => setExitoComentario(false), 3500);
     } catch {
       setErrorComentario("Error al enviar el comentario");
     } finally {
@@ -79,8 +83,8 @@ export default function PaginaDetallePost() {
   if (cargando) {
     return (
       <div className="container py-5 text-center">
-        <div className="spinner-border text-primary" role="status"></div>
-        <p className="mt-2">Cargando publicación...</p>
+        <div className="spinner-border text-primary" role="status" />
+        <p className="mt-2 text-muted">Cargando publicación...</p>
       </div>
     );
   }
@@ -88,7 +92,7 @@ export default function PaginaDetallePost() {
   if (error || !post) {
     return (
       <div className="container py-5">
-        <div className="alert alert-danger">{error ?? "Publicación no encontrada"}</div>
+        <div className="alert alert-danger fade-in">{error ?? "Publicación no encontrada"}</div>
         <Link to="/" className="btn btn-secondary">
           ← Volver al inicio
         </Link>
@@ -97,102 +101,114 @@ export default function PaginaDetallePost() {
   }
 
   return (
-    <div className="container py-4">
-        <Link to="/" className="btn btn-outline-secondary btn-sm mb-3">
-          ← Volver al inicio
-        </Link>
+    <div className="container py-4 fade-in">
+      <Link to="/" className="btn btn-outline-secondary btn-sm mb-3">
+        ← Volver al inicio
+      </Link>
 
-        <div className="row justify-content-center">
-          <div className="col-lg-8">
-            <div className="card shadow-sm mb-4">
-              {imagenes.length > 0 && (
-                <div className="d-flex flex-column gap-2 p-2">
-                  {imagenes.map((img) => (
-                    <img
-                      key={img.id}
-                      src={img.url}
-                      className="img-fluid rounded"
-                      alt="Imagen de la publicación"
-                      style={{ maxHeight: 450, objectFit: "contain", width: "100%", backgroundColor: "#f8f9fa" }}
-                    />
+      <div className="row justify-content-center">
+        <div className="col-lg-8">
+          <div className="card shadow-sm mb-4 card-hover">
+            {imagenes.length > 0 && (
+              <div className="d-flex flex-column gap-2 p-2">
+                {imagenes.map((img) => (
+                  <img
+                    key={img.id}
+                    src={img.url}
+                    className="img-fluid rounded"
+                    alt="Imagen de la publicación"
+                    style={{ maxHeight: 450, objectFit: "contain", width: "100%", backgroundColor: "#f8f9fa" }}
+                  />
+                ))}
+              </div>
+            )}
+
+            <div className="card-body">
+              {post.User && (
+                <h6 className="card-subtitle mb-2 text-muted">
+                  Publicado por @{post.User.nickName}
+                </h6>
+              )}
+
+              <p className="card-text fs-5">{post.description}</p>
+
+              {post.Tags && post.Tags.length > 0 && (
+                <div className="mt-3">
+                  {post.Tags.map((tag) => (
+                    <span key={tag.id} className="badge bg-secondary me-1">
+                      #{tag.name}
+                    </span>
                   ))}
                 </div>
               )}
-
-              <div className="card-body">
-                {post.User && (
-                  <h6 className="card-subtitle mb-2 text-muted">
-                    Publicado por @{post.User.nickName}
-                  </h6>
-                )}
-
-                <p className="card-text fs-5">{post.description}</p>
-
-                {post.Tags && post.Tags.length > 0 && (
-                  <div className="mt-3">
-                    {post.Tags.map((tag) => (
-                      <span key={tag.id} className="badge bg-secondary me-1">
-                        #{tag.name}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
             </div>
+          </div>
 
-            <div className="card shadow-sm">
-              <div className="card-body">
-                <h5 className="card-title mb-3">
-                  💬 Comentarios ({comentarios.length})
-                </h5>
+          <div className="card shadow-sm card-hover">
+            <div className="card-body">
+              <h5 className="card-title mb-3">
+                💬 Comentarios ({comentarios.length})
+              </h5>
 
-                {comentarios.length === 0 ? (
-                  <p className="text-muted">
-                    No hay comentarios visibles todavía. ¡Sé el primero!
-                  </p>
-                ) : (
-                  <ul className="list-group list-group-flush mb-3">
-                    {comentarios.map((c) => (
-                      <li key={c.id} className="list-group-item">
-                        <strong>@{c.User?.nickName ?? user?.nickName ?? "anónimo"}</strong>
-                        <p className="mb-0 mt-1">{c.content}</p>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+              {comentarios.length === 0 ? (
+                <p className="text-muted">
+                  No hay comentarios visibles todavía. ¡Sé el primero!
+                </p>
+              ) : (
+                <ul className="list-group list-group-flush mb-3">
+                  {comentarios.map((c) => (
+                    <li key={c.id} className="list-group-item">
+                      <strong>@{c.User?.nickName ?? user?.nickName ?? "anónimo"}</strong>
+                      <p className="mb-0 mt-1">{c.content}</p>
+                    </li>
+                  ))}
+                </ul>
+              )}
 
-                <hr />
-                <h6>Agregar un comentario</h6>
-                <form onSubmit={handleSubmitComentario}>
-                  <div className="mb-2">
-                    <textarea
-                      className="form-control"
-                      rows={3}
-                      placeholder="Escribí tu comentario..."
-                      value={nuevoComentario}
-                      onChange={(e) => setNuevoComentario(e.target.value)}
-                      required
-                    />
-                  </div>
+              <hr />
+              <h6>Agregar un comentario</h6>
 
-                  {errorComentario && (
-                    <div className="alert alert-danger py-1">
-                      {errorComentario}
-                    </div>
-                  )}
-
+              {exitoComentario && (
+                <div className="alert alert-success alert-dismissible fade-in py-2">
+                  <span>✅ ¡Comentario publicado con éxito!</span>
                   <button
-                    type="submit"
-                    className="btn btn-primary btn-sm"
-                    disabled={enviando || !nuevoComentario.trim()}
-                  >
-                    {enviando ? "Enviando..." : "Comentar"}
-                  </button>
-                </form>
-              </div>
+                    type="button"
+                    className="btn-close py-2"
+                    onClick={() => setExitoComentario(false)}
+                  />
+                </div>
+              )}
+
+              {errorComentario && (
+                <div className="alert alert-danger fade-in py-2">
+                  {errorComentario}
+                </div>
+              )}
+
+              <form onSubmit={handleSubmitComentario}>
+                <div className="mb-2">
+                  <textarea
+                    className="form-control"
+                    rows={3}
+                    placeholder="Escribí tu comentario..."
+                    value={nuevoComentario}
+                    onChange={(e) => setNuevoComentario(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-sm"
+                  disabled={enviando || !nuevoComentario.trim()}
+                >
+                  {enviando ? "Enviando..." : "Comentar"}
+                </button>
+              </form>
             </div>
           </div>
         </div>
       </div>
+    </div>
   );
 }

@@ -14,7 +14,7 @@ function PostUsuarioItem({ post }: { post: Post }) {
   }, [post.id]);
 
   return (
-    <div className="card mb-3 shadow-sm">
+    <div className="card mb-3 shadow-sm card-hover">
       <div className="card-body">
         <p className="card-text fs-5">{post.description}</p>
         <p className="text-muted mb-3">
@@ -44,48 +44,50 @@ export default function PaginaPerfil() {
   }, [user]);
 
   return (
-    <div className="container py-4">
-        <div className="card shadow-sm mb-4">
-          <div className="card-body d-flex justify-content-between align-items-center flex-wrap gap-3">
-            <div>
-              <h2 className="card-title mb-1">Perfil de Usuario</h2>
-              <p className="text-muted fs-5 mb-0">
-                Nickname: <strong className="text-primary">@{user?.nickName}</strong>
-              </p>
-              {user?.email && (
-                <p className="text-muted mb-0">Email: {user.email}</p>
-              )}
-            </div>
-            <button className="btn btn-danger" onClick={logout}>
-              Cerrar sesión
-            </button>
+    <div className="container py-4 fade-in">
+      <div className="card shadow-sm mb-4 card-hover">
+        <div className="card-body d-flex justify-content-between align-items-center flex-wrap gap-3">
+          <div>
+            <h2 className="card-title mb-1">Perfil de Usuario</h2>
+            <p className="text-muted fs-5 mb-0">
+              Nickname: <strong className="text-primary">@{user?.nickName}</strong>
+            </p>
+            {user?.email && (
+              <p className="text-muted mb-0">Email: {user.email}</p>
+            )}
           </div>
+          <button className="btn btn-danger" onClick={logout}>
+            Cerrar sesión
+          </button>
         </div>
+      </div>
 
-        <div className="row justify-content-center">
-          <div className="col-lg-8">
-            <h3 className="mb-3">Mis publicaciones</h3>
+      <div className="row justify-content-center">
+        <div className="col-lg-8">
+          <h3 className="mb-3">Mis publicaciones</h3>
 
-            {cargando && (
-              <div className="text-center py-4">
-                <div className="spinner-border text-primary" role="status"></div>
-                <p className="mt-2">Cargando publicaciones...</p>
-              </div>
-            )}
+          {cargando && (
+            <div className="text-center py-4">
+              <div className="spinner-border text-primary" role="status" />
+              <p className="mt-2 text-muted">Cargando publicaciones...</p>
+            </div>
+          )}
 
-            {error && <div className="alert alert-danger">{error}</div>}
+          {error && <div className="alert alert-danger fade-in">{error}</div>}
 
-            {!cargando && !error && posts.length === 0 && (
-              <div className="alert alert-info">
-                Todavía no realizaste ninguna publicación.
-              </div>
-            )}
+          {!cargando && !error && posts.length === 0 && (
+            <div className="alert alert-info fade-in">
+              Todavía no realizaste ninguna publicación.
+            </div>
+          )}
 
+          <div className="fade-in">
             {posts.map((post) => (
               <PostUsuarioItem key={post.id} post={post} />
             ))}
           </div>
         </div>
       </div>
+    </div>
   );
 }
