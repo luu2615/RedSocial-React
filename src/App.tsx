@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PaginaLogin from "./pages/PaginaLogin";
 import PaginaRegistro from "./pages/PaginaRegistro";
@@ -12,18 +13,21 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <Navbar />
         <Routes>
+          <Route path="/" element={<PaginaHome />} />
+          <Route path="/post/:id" element={<PaginaDetallePost />} />
           <Route path="/login" element={<PaginaLogin />} />
           <Route path="/register" element={<PaginaRegistro />} />
           <Route path="/registro" element={<Navigate to="/register" replace />} />
+
           <Route element={<ProtectedRoute />}>
-            <Route path="/" element={<PaginaHome />} />
-            <Route path="/post/:id" element={<PaginaDetallePost />} />
             <Route path="/profile" element={<PaginaPerfil />} />
             <Route path="/perfil" element={<Navigate to="/profile" replace />} />
             <Route path="/create-post" element={<PaginaCrearPost />} />
             <Route path="/nuevo-post" element={<Navigate to="/create-post" replace />} />
           </Route>
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>

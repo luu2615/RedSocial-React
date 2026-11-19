@@ -14,11 +14,11 @@ export default function PostCard({ post }: Props) {
   useEffect(() => {
     getImagesByPostId(post.id)
       .then(setImagenes)
-      .catch(() => {});
+      .catch(() => { });
 
     getCommentsByPostId(post.id)
       .then(setComentarios)
-      .catch(() => {});
+      .catch(() => { });
   }, [post.id]);
 
   return (
@@ -50,7 +50,7 @@ export default function PostCard({ post }: Props) {
         )}
 
         <p className="text-muted mb-2">
-          💬 {comentarios.length} comentario{comentarios.length !== 1 ? "s" : ""}
+          <i className="bi bi-chat-dots-fill me-1"></i> {comentarios.length} comentario{comentarios.length !== 1 ? "s" : ""}
         </p>
 
         <Link to={`/post/${post.id}`} className="btn btn-outline-primary btn-sm">

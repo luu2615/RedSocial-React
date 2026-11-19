@@ -45,7 +45,7 @@ export default function PaginaHome() {
         <div className="container text-center fade-in">
           <h1 className="display-4 fw-bold">UnaHur Anti-Social Net</h1>
           <p className="lead mb-4">
-            La red social donde nadie quiere hablar con nadie.
+            La red social donde nadie quiere hablar.
           </p>
           {posts.length > 0 && (
             <button

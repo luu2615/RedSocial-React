@@ -108,7 +108,7 @@ export default function PaginaCrearPost() {
 
               {exito && (
                 <div className="alert alert-success fade-in py-2">
-                  ✅ ¡Publicación creada con éxito!
+                  <i className="bi bi-check-circle-fill me-2"></i> ¡Publicación creada con éxito!
                 </div>
               )}
 
@@ -123,7 +123,7 @@ export default function PaginaCrearPost() {
                     id="description"
                     className="form-control"
                     rows={4}
-                    placeholder="¿Qué estás pensando (o prefiriendo no decir)?"
+                    placeholder="¿Qué estás pensando?"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     required
@@ -181,8 +181,8 @@ export default function PaginaCrearPost() {
                             type="button"
                             key={tag.id}
                             className={`btn btn-sm tag-badge ${seleccionada
-                                ? "btn-primary"
-                                : "btn-outline-secondary"
+                              ? "btn-primary"
+                              : "btn-outline-secondary"
                               }`}
                             onClick={() => handleTagToggle(tag.id)}
                           >

@@ -10,7 +10,7 @@ function PostUsuarioItem({ post }: { post: Post }) {
   useEffect(() => {
     getCommentsByPostId(post.id)
       .then((comentarios) => setCantidadComentarios(comentarios.length))
-      .catch(() => {});
+      .catch(() => { });
   }, [post.id]);
 
   return (
@@ -18,7 +18,7 @@ function PostUsuarioItem({ post }: { post: Post }) {
       <div className="card-body">
         <p className="card-text fs-5">{post.description}</p>
         <p className="text-muted mb-3">
-          💬 {cantidadComentarios} comentario{cantidadComentarios !== 1 ? "s" : ""}
+          <i className="bi bi-chat-dots-fill me-1"></i> {cantidadComentarios} comentario{cantidadComentarios !== 1 ? "s" : ""}
         </p>
         <Link to={`/post/${post.id}`} className="btn btn-outline-primary btn-sm">
           Ver más

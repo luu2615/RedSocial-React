@@ -117,7 +117,7 @@ export default function PaginaDetallePost() {
                     src={img.url}
                     className="img-fluid rounded"
                     alt="Imagen de la publicación"
-                    style={{ maxHeight: 450, objectFit: "contain", width: "100%", backgroundColor: "#f8f9fa" }}
+                    style={{ maxHeight: 450, objectFit: "contain", width: "100%" }}
                   />
                 ))}
               </div>
@@ -147,7 +147,7 @@ export default function PaginaDetallePost() {
           <div className="card shadow-sm card-hover">
             <div className="card-body">
               <h5 className="card-title mb-3">
-                💬 Comentarios ({comentarios.length})
+                <i className="bi bi-chat-dots-fill me-1"></i> Comentarios ({comentarios.length})
               </h5>
 
               {comentarios.length === 0 ? (
@@ -170,7 +170,7 @@ export default function PaginaDetallePost() {
 
               {exitoComentario && (
                 <div className="alert alert-success alert-dismissible fade-in py-2">
-                  <span>✅ ¡Comentario publicado con éxito!</span>
+                  <span><i className="bi bi-check-circle-fill me-2"></i> ¡Comentario publicado con éxito!</span>
                   <button
                     type="button"
                     className="btn-close py-2"
@@ -185,26 +185,34 @@ export default function PaginaDetallePost() {
                 </div>
               )}
 
-              <form onSubmit={handleSubmitComentario}>
-                <div className="mb-2">
-                  <textarea
-                    className="form-control"
-                    rows={3}
-                    placeholder="Escribí tu comentario..."
-                    value={nuevoComentario}
-                    onChange={(e) => setNuevoComentario(e.target.value)}
-                    required
-                  />
-                </div>
+                  {user ? (
+                    <form onSubmit={handleSubmitComentario}>
+                      <div className="mb-2">
+                        <textarea
+                          className="form-control"
+                          rows={3}
+                          placeholder="Escribí tu comentario..."
+                          value={nuevoComentario}
+                          onChange={(e) => setNuevoComentario(e.target.value)}
+                          required
+                        />
+                      </div>
 
-                <button
-                  type="submit"
-                  className="btn btn-primary btn-sm"
-                  disabled={enviando || !nuevoComentario.trim()}
-                >
-                  {enviando ? "Enviando..." : "Comentar"}
-                </button>
-              </form>
+                      <button
+                        type="submit"
+                        className="btn btn-primary btn-sm"
+                        disabled={enviando || !nuevoComentario.trim()}
+                      >
+                        {enviando ? "Enviando..." : "Comentar"}
+                      </button>
+                    </form>
+                  ) : (
+                <div className="alert alert-light border mt-2 py-2">
+                  <span className="text-muted">
+                    Debés <Link to="/login" className="fw-semibold text-primary">iniciar sesión</Link> para dejar un comentario.
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -41,32 +41,55 @@ export default function Navbar() {
               <span>Inicio</span>
             </NavLink>
 
-            <Link
-              to="/create-post"
-              className="btn btn-primary btn-sm rounded-pill px-3 d-flex align-items-center gap-1 shadow-sm"
-              onClick={closeMenu}
-            >
-              <i className="bi bi-plus-lg"></i>
-              <span>Nuevo Post</span>
-            </Link>
+            {user ? (
+              <>
+                <Link
+                  to="/create-post"
+                  className="btn btn-primary btn-sm rounded-pill px-3 d-flex align-items-center gap-1 shadow-sm"
+                  onClick={closeMenu}
+                >
+                  <i className="bi bi-plus-lg"></i>
+                  <span>Nuevo Post</span>
+                </Link>
 
-            <Link
-              to="/profile"
-              className="btn btn-outline-light btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
-              onClick={closeMenu}
-            >
-              <i className="bi bi-person-circle"></i>
-              <span>{user?.nickName}</span>
-            </Link>
+                <Link
+                  to="/profile"
+                  className="btn btn-outline-light btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
+                  onClick={closeMenu}
+                >
+                  <i className="bi bi-person-circle"></i>
+                  <span>{user.nickName}</span>
+                </Link>
 
-            <button
-              type="button"
-              className="btn btn-outline-danger btn-sm d-flex align-items-center gap-1"
-              onClick={() => { closeMenu(); logout(); }}
-            >
-              <i className="bi bi-box-arrow-right"></i>
-              <span>Salir</span>
-            </button>
+                <button
+                  type="button"
+                  className="btn btn-outline-danger btn-sm d-flex align-items-center gap-1"
+                  onClick={() => { closeMenu(); logout(); }}
+                >
+                  <i className="bi bi-box-arrow-right"></i>
+                  <span>Salir</span>
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="btn btn-outline-light btn-sm rounded-pill px-3 d-flex align-items-center gap-1"
+                  onClick={closeMenu}
+                >
+                  <i className="bi bi-box-arrow-in-right"></i>
+                  <span>Ingresar</span>
+                </Link>
+                <Link
+                  to="/register"
+                  className="btn btn-primary btn-sm rounded-pill px-3 d-flex align-items-center gap-1 shadow-sm"
+                  onClick={closeMenu}
+                >
+                  <i className="bi bi-person-plus"></i>
+                  <span>Registrarse</span>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>
