@@ -2,15 +2,14 @@
 UnaHur Anti-Social Net
 
 # Descripción breve
-FrontEnd en React + TypeScript para la red social "UnaHur Anti-Social Net", utilizando la API proporcionada por la materia Construcción de Interfaces de Usuario (UNAHUR). La aplicación permite que las personas usuarias puedan navegar publicaciones, agregar comentarios, registrarse, iniciar sesión, filtrar por etiquetas y crear sus propios posteos.
+FrontEnd en React para la red social "UnaHur Anti-Social Net", utilizando una API proporcionada. La aplicación permite que las personas usuarias puedan navegar publicaciones, agregar comentarios, registrarse, iniciar sesión y crear sus propios posteos.
 
 # Tecnologías utilizadas
 ### Frontend
 - **[React 19](https://react.dev/)**: Biblioteca principal para la construcción de interfaces y componentes.
-- **[TypeScript](https://www.typescriptlang.org/)**: Tipado estático estricto en toda la aplicación.
 - **[Vite](https://vitejs.dev/)**: Entorno de desarrollo rápido y empaquetador.
 - **[React Router DOM](https://reactrouter.com/)**: Enrutamiento declarativo, navegación y rutas protegidas (`BrowserRouter`, `Routes`, `Route`, `Link`, `NavLink`, `useParams`, `useNavigate`).
-- **[Bootstrap 5](https://getbootstrap.com/)**: Sistema de diseño responsivo con rejilla, componentes y personalización CSS.
+- **[Bootstrap 5](https://getbootstrap.com/)**: Sistema de diseño responsivo con grid, componentes y personalización CSS.
 - **[Bootstrap Icons](https://icons.getbootstrap.com/)**: Iconografía SVG para la navegación e interacciones.
 - **[Context API & LocalStorage](https://developer.mozilla.org/es/docs/Web/API/Window/localStorage)**: Gestión global del estado de autenticación y persistencia de sesión.
 
@@ -39,3 +38,6 @@ FrontEnd en React + TypeScript para la red social "UnaHur Anti-Social Net", util
 
 # Integrantes del grupo
 Luján Azul Rojas
+
+# Screenshots
+![./Screenshot/ss1.png](./Screenshot/ss1.png)
