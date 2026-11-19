@@ -27,7 +27,7 @@ export default function PaginaRegistro() {
     }
 
     if (password !== "123456") {
-      setError("La contraseña debe ser 123456 (simulación del sistema)");
+      setError("La contraseña debe ser 123456");
       return;
     }
 

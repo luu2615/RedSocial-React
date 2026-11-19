@@ -52,7 +52,7 @@ export default function PaginaHome() {
               className="btn btn-warning fw-semibold shadow-sm"
               onClick={handleSeleccionarAleatorio}
             >
-              🎲 Ver publicación aleatoria
+              <i className="bi bi-arrow-clockwise"></i> Ver publicación aleatoria
             </button>
           )}
         </div>
@@ -63,7 +63,7 @@ export default function PaginaHome() {
           <div className="alert alert-warning alert-dismissible fade-in shadow-sm mb-4">
             <div className="d-flex justify-content-between align-items-center flex-wrap gap-2">
               <div>
-                <h5 className="alert-heading mb-1">✨ Publicación destacada / aleatoria</h5>
+                <h5 className="alert-heading mb-1"><i className="bi bi-stars me-2"></i> Publicación destacada / aleatoria</h5>
                 <p className="mb-0">
                   <strong>@{postAleatorio.User?.nickName ?? "usuario"}</strong>: &ldquo;{postAleatorio.description}&rdquo;
                 </p>
@@ -80,7 +80,7 @@ export default function PaginaHome() {
                   className="btn btn-sm btn-outline-dark"
                   onClick={handleSeleccionarAleatorio}
                 >
-                  🎲 Otra
+                  <i className="bi bi-dice-5-fill"></i>
                 </button>
                 <button
                   type="button"
@@ -95,7 +95,7 @@ export default function PaginaHome() {
         <div className="row">
           <div className="col-lg-8">
             <div className="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
-              <h2 className="h4 mb-0">📰 Publicaciones recientes</h2>
+              <h2 className="h4 mb-0"><i className="bi bi-newspaper me-2"></i> Publicaciones recientes</h2>
               {tagSeleccionada && (
                 <span className="badge bg-primary fs-6 p-2 fade-in">
                   Filtrado por: #{tagSeleccionada.name}{" "}
@@ -158,8 +158,7 @@ export default function PaginaHome() {
                 <h5 className="card-title">Sobre nosotros</h5>
                 <p className="card-text">
                   <strong>UnaHur Anti-Social Net</strong> es la red social
-                  oficial de la Universidad Nacional de Hurlingham para quienes
-                  prefieren postear antes que socializar.
+                  oficial de la Universidad Nacional de Hurlingham.
                 </p>
                 <p className="card-text text-muted small">
                   Proyecto desarrollado para la materia Construcción de
@@ -172,7 +171,7 @@ export default function PaginaHome() {
               <div className="card shadow-sm card-hover">
                 <div className="card-body">
                   <div className="d-flex justify-content-between align-items-center mb-2">
-                    <h5 className="card-title mb-0">🏷️ Filtrar por etiquetas</h5>
+                    <h5 className="card-title mb-0"><i className="bi bi-tags-fill text-dark me-2"></i> Filtrar por etiquetas</h5>
                     {tagSeleccionada && (
                       <button
                         className="btn btn-link btn-sm text-decoration-none p-0"
@@ -192,9 +191,8 @@ export default function PaginaHome() {
                         <button
                           key={tag.id}
                           type="button"
-                          className={`btn btn-sm tag-badge ${
-                            activa ? "btn-primary" : "btn-outline-secondary"
-                          }`}
+                          className={`btn btn-sm tag-badge ${activa ? "btn-primary" : "btn-outline-secondary"
+                            }`}
                           onClick={() =>
                             setTagSeleccionada(activa ? null : tag)
                           }

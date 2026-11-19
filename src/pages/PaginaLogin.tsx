@@ -21,12 +21,12 @@ export default function PaginaLogin() {
 
     const nickLimpio = nickName.trim();
     if (!nickLimpio) {
-      setError("Por favor ingresa tu nickname");
+      setError("Poor favor ingresa tu nickname");
       return;
     }
 
     if (password !== PASSWORD) {
-      setError("Contraseña incorrecta (recuerda que es 123456)");
+      setError("Contraseña incorrecta");
       return;
     }
 
